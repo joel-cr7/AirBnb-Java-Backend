@@ -5,7 +5,6 @@ import com.backend.project.Airbnb.entity.Hotel;
 import com.backend.project.Airbnb.entity.Room;
 import com.backend.project.Airbnb.exception.ResourceNotFoundException;
 import com.backend.project.Airbnb.repository.HotelRepository;
-import com.backend.project.Airbnb.repository.InventoryRepository;
 import com.backend.project.Airbnb.repository.RoomRepository;
 import com.backend.project.Airbnb.service.InventoryService;
 import com.backend.project.Airbnb.service.RoomService;
@@ -80,7 +79,7 @@ public class RoomServiceImpl implements RoomService {
 
         // delete all future inventory for this room.
         // first delete the inventories as room is referenced there
-        inventoryService.deleteFutureInventories(room);
+        inventoryService.deleteAllInventories(room);
 
         roomRepository.deleteById(roomId);
     }

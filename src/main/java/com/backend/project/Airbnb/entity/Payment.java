@@ -20,6 +20,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Booking booking;
+
     @Column(unique = true, nullable = false)
     private String transactionId;
 
