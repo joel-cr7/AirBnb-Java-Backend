@@ -1,23 +1,28 @@
 package com.backend.project.Airbnb.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-
-// Note: this is room type and not individual rooms in hotel
 
 @Entity
 @Getter
 @Setter
-public class Room {
+@NoArgsConstructor
+public class HotelMinPrice {
+
+    public HotelMinPrice(Hotel hotel, LocalDate date) {
+        this.hotel = hotel;
+        this.date = date;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,22 +32,10 @@ public class Room {
     private Hotel hotel;
 
     @Column(nullable = false)
-    private String type;
+    private LocalDate date;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal basePrice;   // allow upto 10 digits and 2 decimal places
-
-    @Column(columnDefinition = "TEXT[]")
-    private String[] photos;    // urls of photos
-
-    @Column(columnDefinition = "TEXT[]")
-    private String[] amenities;     // room features
-
-    @Column(nullable = false)
-    private Integer totalCount;
-
-    @Column(nullable = false)
-    private Integer capacity;
+    private BigDecimal price;       // cheapest room price in the hotel on a particular day
 
     @CreationTimestamp
     @Column(updatable = false)
