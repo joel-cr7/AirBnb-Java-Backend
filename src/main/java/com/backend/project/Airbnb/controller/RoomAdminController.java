@@ -19,14 +19,6 @@ public class RoomAdminController {
     private final RoomService roomService;
 
 
-    @PostMapping
-    public ResponseEntity<RoomDTO> createRoom(@PathVariable Long hotelId,
-                                              @RequestBody RoomDTO roomDTO){
-        log.info("Attempting to create a new room in hotel with ID: {}", hotelId);
-        RoomDTO room = roomService.createRoomInHotel(hotelId, roomDTO);
-        return new ResponseEntity<>(room, HttpStatus.CREATED);
-    }
-
     @GetMapping
     public ResponseEntity<List<RoomDTO>> getAllRoomsInHotel(@PathVariable Long hotelId){
         List<RoomDTO> rooms = roomService.getAllRoomsInHotel(hotelId);
@@ -37,6 +29,21 @@ public class RoomAdminController {
     public ResponseEntity<RoomDTO> getRoomById(@PathVariable Long roomId){
         RoomDTO room = roomService.getRoomById(roomId);
         return ResponseEntity.ok(room);
+    }
+
+    @PostMapping
+    public ResponseEntity<RoomDTO> createRoom(@PathVariable Long hotelId,
+                                              @RequestBody RoomDTO roomDTO){
+        log.info("Attempting to create a new room in hotel with ID: {}", hotelId);
+        RoomDTO room = roomService.createRoomInHotel(hotelId, roomDTO);
+        return new ResponseEntity<>(room, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{roomId}")
+    public ResponseEntity<RoomDTO> updateRoomById(@PathVariable Long hotelId,
+                                                  @PathVariable Long roomId,
+                                                  @RequestBody RoomDTO roomDTO){
+        return ResponseEntity.ok(roomService.updateRoomById(hotelId, roomId, roomDTO));
     }
 
     @DeleteMapping("/{roomId}")

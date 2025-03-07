@@ -25,6 +25,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+
+/**
+ * Class responsible to handle the updation of prices of rooms from inventory based on dynamicPricing strategy
+ * (using scheduler to update prices every hour)
+ *
+ * Also update the table that stores most minimum price room of the hotel on a particular day from the inventory
+ *
+ */
+
 @Service
 @RequiredArgsConstructor
 @Slf4j

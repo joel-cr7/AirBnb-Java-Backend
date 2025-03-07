@@ -4,6 +4,8 @@ import com.backend.project.Airbnb.dto.HotelDTO;
 import com.backend.project.Airbnb.dto.HotelInfoDTO;
 import com.backend.project.Airbnb.entity.Hotel;
 
+import java.util.List;
+
 public interface HotelService {
     HotelDTO createHotel(HotelDTO hotelDTO);
 
@@ -16,4 +18,7 @@ public interface HotelService {
     void activateHotel(Long hotelId);
 
     HotelInfoDTO getHotelInfoById(Long hotelId);
+
+    List<HotelDTO> getAllHotels();
+
 }

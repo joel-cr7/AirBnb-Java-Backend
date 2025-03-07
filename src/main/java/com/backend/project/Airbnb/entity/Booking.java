@@ -49,7 +49,7 @@ public class Booking {
     @Column(nullable = false)
     private BookingStatus bookingStatus;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "booking_guest",
             joinColumns = @JoinColumn(name = "booking_id"),
@@ -59,6 +59,9 @@ public class Booking {
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
+
+    @Column(unique = true)
+    private String paymentSessionId;    // store stripe session id
 
     @CreationTimestamp
     @Column(updatable = false)
